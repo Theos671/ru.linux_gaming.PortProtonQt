@@ -1,0 +1,4 @@
+build
+build-dir
+export-dir
+*.flatpak

@@ -1,4 +1,4 @@
-app-id: ru.linux_gaming.PortProton
+app-id: ru.linux_gaming.PortProtonQt
 sdk: org.kde.Sdk
 runtime: org.kde.Platform
 runtime-version: '6.10'
@@ -13,9 +13,6 @@ build-options:
     PYGAME_EXTRA_BASE: /app
     ORIGLIBDIRS: /lib:/lib64:/lib/x86_64-linux-gnu
     LLVM_INSTALL_DIR: /usr/lib/sdk/llvm21
-
-cleanup-commands:
-  - /app/pyside_cleanup.sh
 
 finish-args:
   - --share=ipc
@@ -84,7 +81,7 @@ add-extensions:
     add-ld-path: lib
 
 modules:
-  - ru.linux_gaming.PortProton.pypi-deps.yaml
+  - ru.linux_gaming.PortProtonQt.pypi-deps.yaml
 
   - name: pyside-setup
     buildsystem: simple
@@ -196,7 +193,7 @@ modules:
   - name: cabextract
     sources:
       - type: archive
-        url: https://www.cabextract.org.uk/cabextract-1.11.tar.gz
+        path: cabextract-1.11.tar.gz
         sha256: b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6
 
   - name: vulkan-headers
@@ -298,26 +295,21 @@ modules:
         mkdir -p /app/lib/i386-linux-gnu/codecs-extra
         mkdir -p /app/share/vulkan/implicit_layer.d/
         install -Dm644 -t /app/etc ld.so.conf
-        install -Dm755 pyside_cleanup.sh ${FLATPAK_DEST}/pyside_cleanup.sh
     sources:
       - type: inline
         dest-filename: ld.so.conf
         contents: |
           /app/lib32
           /app/lib/i386-linux-gnu
-      - type: file
-        path: pyside_cleanup.sh
 
   - name: PortProtonQt
     buildsystem: meson
     sources:
       - type: git
         url: https://git.linux-gaming.ru/Linux-Gaming/PortProtonQt.git
-        tag: 'v1.2.0'
-        commit: 4d6f6c1b82de86199636ec0fc74e64f703e3373e
+        tag: 'v1.3.1'
+        commit: b134c73d2a0b4f922f3e77dce3073a68137094b5
         x-checker-data:
           type: git
           is-main-source: true
           tag-pattern: ^v(\d+\.\d+\.\d+)$
-      - type: patch
-        path: patches/0001-feat-implement-XDG-Desktop-Portal-notification-fallback.patch
