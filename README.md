@@ -20,7 +20,7 @@
         `flatpak build-bundle build/export-dir build/PortProtonQt.flatpak ru.linux_gaming.PortProtonQt`
     2. Сразу
         - Собрать и создать установочный файл:  
-        `flatpak-builder --force-clean --install-deps-from=flathub --repo=build/export-dir build/build-dir ru.linux_gaming.PortProtonQt.yml && flatpak build-bundle build/export-dir PortProtonQt.flatpak ru.linux_gaming.PortProtonQt`
+        `flatpak-builder --force-clean --install-deps-from=flathub --repo=build/export-dir build/build-dir ru.linux_gaming.PortProtonQt.yml && flatpak build-bundle build/export-dir build/PortProtonQt.flatpak ru.linux_gaming.PortProtonQt`
 - Установка и запуск:
     1. Запуск без установки  
        `flatpak-builder --run build/build-dir ru.linux_gaming.PortProtonQt.yml portprotonqt`
